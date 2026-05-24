@@ -97,7 +97,7 @@ async function syncPlaylist() {
 // 1. RUTA DE TRANSMISIÓN (STREAMING PARA OYENTES)
 app.get('/stream', (req, res) => {
     // Cabeceras HTTP estándar para streaming continuo de audio MP3 (tipo Icecast)
-    res.setHeader('Content-Type', 'audio/ogg');
+    res.setHeader('Content-Type', 'audio/mpeg');
     res.setHeader('Transfer-Encoding', 'chunked');
     res.setHeader('Connection', 'keep-alive');
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -178,8 +178,11 @@ async function playAutoDJ() {
             '-i', finalUrl,
             '-vn', // Ignorar el cover art (imagen) porque causa que -re se congele intentando sincronizar los timestamps del video
             '-loglevel', 'error', // Ocultar banner y progreso para mantener la terminal limpia
-            '-c:a', 'copy', // Pasar el Opus original sin recodificar (0% uso de CPU)
-            '-f', 'ogg',    // Contenedor estándar para streaming de Opus
+            '-c:a', 'libmp3lame', // Transcodificar a MP3 (único formato que soporta unirse al stream en cualquier momento sin perder cabeceras)
+            '-b:a', '128k',       // Bitrate aceptable
+            '-ac', '2',
+            '-ar', '44100',
+            '-f', 'mp3',          // Contenedor MP3 (headerless)
             'pipe:1'
         ];
 
