@@ -182,6 +182,8 @@ async function playAutoDJ() {
             '-b:a', '128k',       // Bitrate aceptable
             '-ac', '2',
             '-ar', '44100',
+            '-write_xing', '0',   // Crucial: no escribir cabecera Xing al inicio de cada canción
+            '-id3v2_version', '0',// Crucial: no escribir tags ID3 que corrompan el empalme
             '-f', 'mp3',          // Contenedor MP3 (headerless)
             'pipe:1'
         ];

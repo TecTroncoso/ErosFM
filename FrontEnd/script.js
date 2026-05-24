@@ -59,6 +59,28 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("next-btn").addEventListener("click", () => {});
     document.getElementById("prev-btn").addEventListener("click", () => {});
 
+    // Reconexión automática: si el navegador corta el audio al empalmar canciones
+    function forceReconnect() {
+        if (isPlaying) {
+            console.log("Reiniciando stream...");
+            // Forzar recarga del stream añadiendo un timestamp falso para bypassear la caché
+            const currentSrc = audioPlayer.src.split('?')[0];
+            audioPlayer.src = currentSrc + '?t=' + new Date().getTime();
+            audioPlayer.load();
+            audioPlayer.play().catch(() => {});
+        }
+    }
+
+    audioPlayer.addEventListener("ended", forceReconnect);
+    audioPlayer.addEventListener("error", forceReconnect);
+    
+    // Si se queda esperando datos por mucho tiempo y se tilda
+    audioPlayer.addEventListener("stalled", () => {
+        if (isPlaying && audioPlayer.readyState === 0) {
+            forceReconnect();
+        }
+    });
+
     // Consultar al backend qué canción suena ahora
     async function fetchNowPlaying() {
         try {
