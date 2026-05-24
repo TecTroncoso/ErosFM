@@ -103,6 +103,8 @@ app.get('/stream', (req, res) => {
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.setHeader('Pragma', 'no-cache');
     res.setHeader('Expires', '0');
+    // Fundamental para Render: evitar que el proxy (Nginx) retenga los primeros segundos del audio
+    res.setHeader('X-Accel-Buffering', 'no');
 
     // Registrar al nuevo oyente
     clients.add(res);
@@ -208,7 +210,12 @@ async function playAutoDJ() {
         });
 
         // Pipear el audio (stdout de ffmpeg) hacia todos los oyentes
+        let firstChunkSent = false;
         ffmpeg.stdout.on('data', (chunk) => {
+            if (!firstChunkSent) {
+                console.log(`📻 FFmpeg empezó a emitir bytes (Chunk size: ${chunk.length})`);
+                firstChunkSent = true;
+            }
             clients.forEach(client => {
                 if (client.writable) {
                     client.write(chunk);
