@@ -1,0 +1,5 @@
+# Configuración de Nixpacks para Render
+# Esto asegura que FFmpeg se instale automáticamente como paquete del sistema durante la compilación
+
+[phases.setup]
+nixPkgs = ["...", "ffmpeg"]

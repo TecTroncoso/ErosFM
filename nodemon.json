@@ -1,0 +1,5 @@
+{
+  "ignore": ["playlist.json", "FrontEnd/**"],
+  "signal": "SIGINT",
+  "delay": 500
+}

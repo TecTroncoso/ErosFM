@@ -1,0 +1,17 @@
+# Archivo Blueprint de Render para despliegue automatizado
+services:
+  - type: web
+    name: eros-fm-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: HF_USER
+        sync: false # Indica que se debe cargar el valor manualmente en el dashboard de Render
+      - key: HF_DATASET
+        sync: false
+      - key: HF_TOKEN
+        sync: false

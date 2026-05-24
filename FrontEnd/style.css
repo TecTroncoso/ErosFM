@@ -1,0 +1,277 @@
+/* Variables de diseño sensual */
+:root {
+    --primary-color: #d11141; /* Rojo profundo y pasional */
+    --accent-color: #ffb3c6; /* Rosa suave */
+    --bg-dark: #0a0004; /* Negro profundo con un toque cálido */
+    --text-light: #f8ecee;
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Montserrat', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle at center, #360015 0%, var(--bg-dark) 100%);
+    color: var(--text-light);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Textura suave por encima del fondo */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://www.transparenttextures.com/patterns/stardust.png');
+    opacity: 0.2;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Contenedor principal estilo cristal tintado */
+.radio-container {
+    position: relative;
+    z-index: 2;
+    background: rgba(15, 0, 5, 0.65);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(209, 17, 65, 0.2);
+    border-radius: 30px;
+    padding: 40px;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.9), 0 0 50px rgba(209, 17, 65, 0.15);
+    text-align: center;
+}
+
+/* Encabezado */
+header {
+    margin-bottom: 30px;
+}
+
+.logo {
+    font-family: var(--font-serif);
+    font-size: 2.8rem;
+    font-style: italic;
+    color: #fff;
+    text-shadow: 0 0 15px rgba(209, 17, 65, 0.7);
+}
+
+.logo span {
+    color: var(--primary-color);
+    font-style: normal;
+    font-weight: 300;
+}
+
+.tagline {
+    font-size: 0.9rem;
+    color: var(--accent-color);
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-top: 5px;
+    opacity: 0.8;
+}
+
+/* Portada y disco simulado */
+.player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.artwork-container {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    margin-bottom: 25px;
+    box-shadow: 0 0 35px rgba(209, 17, 65, 0.4), 0 10px 20px rgba(0,0,0,0.8);
+    border: 4px solid #1a0008;
+}
+
+.artwork {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+
+.artwork img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+    transition: opacity 0.3s;
+}
+
+/* Agujero del centro del vinilo */
+.vinyl-hole {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25px;
+    height: 25px;
+    background: var(--bg-dark);
+    border-radius: 50%;
+    border: 2px solid #1a0008;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
+}
+
+/* Animación sensual y suave girando */
+.spin {
+    animation: spin 12s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Información de la canción */
+.track-info {
+    margin-bottom: 30px;
+    height: 60px;
+}
+
+#track-title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 5px;
+    letter-spacing: 0.5px;
+}
+
+#artist-name {
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Controles */
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+    margin-bottom: 30px;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    color: var(--accent-color);
+    transform: scale(1.15);
+    text-shadow: 0 0 10px rgba(255, 179, 198, 0.5);
+}
+
+.play-btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, var(--primary-color), #8a0b2b);
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 25px rgba(209, 17, 65, 0.6);
+    transition: all 0.3s ease;
+}
+
+.play-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 35px rgba(209, 17, 65, 0.9);
+}
+
+.play-btn:active {
+    transform: scale(0.95);
+}
+
+/* Slider de Volumen */
+.volume-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 85%;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+#volume-slider {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    outline: none;
+}
+
+#volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--primary-color);
+    transition: transform 0.2s;
+}
+
+#volume-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.3);
+}
+
+/* Footer */
+footer {
+    margin-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 20px;
+}
+
+footer p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.3);
+    margin-bottom: 15px;
+    font-family: var(--font-serif);
+    font-style: italic;
+}
+
+.socials {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.socials i {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.socials i:hover {
+    color: var(--accent-color);
+    transform: translateY(-3px);
+}
