@@ -17,10 +17,10 @@ Eros FM es un backend ligero y de alto rendimiento diseñado para transmitir aud
 
 * **Transmisión Ininterrumpida (Icecast-like)**: Mantiene una única manguera de streaming (`/stream`) a la que los oyentes pueden conectarse y desconectarse en cualquier momento.
 * **AutoDJ Inteligente**: Lee tu dataset privado, arma una playlist dinámicamente y empalma las canciones automáticamente.
-* **Transcodificación MP3 en vivo**: Utiliza FFmpeg para convertir archivos pesados u Opus a MP3 (`-c:a libmp3lame`), el formato estándar y "headerless" que permite a los oyentes unirse al stream de audio a mitad de una canción sin errores.
+* **Transcodificación MP3 en vivo**: Utiliza FFmpeg para convertir archivos pesados u Opus a MP3 crudo (stripping de tags ID3/Xing), el formato "headerless" perfecto que evita errores del decodificador al empalmar canciones.
 * **Anti-Buffering Nginx**: Inyecta la cabecera `X-Accel-Buffering: no` para evitar que los proxies inversos (como los de Render) retengan los primeros segundos del audio, garantizando streaming instantáneo.
 * **Sistema Anti-Bloqueos**: Maneja manualmente las redirecciones 302 y purga los headers de autorización para evitar errores `401 Unauthorized` al interactuar con el CDN (S3) de Hugging Face.
-* **Frontend Nativo**: Incluye un cliente estático en `/FrontEnd` con *autoplay fallback* (arranca muteado si el navegador lo bloquea, desmutea al primer clic) e interfaz animada.
+* **Frontend Nativo y Resiliente**: Cliente estático con *autoplay fallback* (arranca muteado si es bloqueado) y **Auto-Reconnect automático** (reinicia el stream silenciosamente si hay un bache de red o empalme de canciones).
 * **Metadata en Vivo**: Expone un endpoint `/now-playing` para que el frontend sincronice el Título y Artista en tiempo real.
 * **Graceful Shutdown**: Prevención de procesos zombies (`EADDRINUSE`) terminando limpiamente los hilos de FFmpeg al reiniciar o apagar el servidor.
 
